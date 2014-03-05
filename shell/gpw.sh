@@ -10,14 +10,14 @@ E_NUMBER_ONE=1
 pwlen="${1}"
 numpw="${2}"
 
-if ! [[ "${2}" ]]
+if [[ -z "${2}" ]]
 then
   numpw="1"
 else
   numpw="${2}"
 fi
 
-if ! [[ "${1}" ]]
+if [[ -z "${1}" ]]
 then
   pwlen="10"
 else
@@ -27,7 +27,7 @@ fi
 if [ "${pwlen}" -gt "250" ]
 then
   #Comment this whole if loop out if you want larger than 250
-  echo "Password should probably be < 250 characters"
+  echo "Password should probably be <= 250 characters"
   exit ${E_TOO_LONG}
 fi
 
@@ -50,11 +50,11 @@ else
     else
       if [[ ${numpw} -eq "1" ]]
       then
-        echo "Generating password that is $pwlen characters long."
+        echo "Generating password that is ${pwlen} characters long."
         sleep 1;
         LANG=C; tr -cd "[:upper:][:alnum:][:punct:]" < /dev/urandom | head -c ${pwlen} | xargs -0; LANG=en_US.UTF-8
       else
-        echo "Generating $numpw passwords of ${pwlen} length."
+        echo "Generating $numpw passwords of ${pwlen} characters."
         sleep 1;
         for ((i = 1; i <= ${numpw}; i++))
          do 
