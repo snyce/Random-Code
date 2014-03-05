@@ -3,7 +3,7 @@ A place to put random code that is not project related. It took me a while to ge
 ~~~~
 C - cause roots (really really really old C stuff, doesn't work).
 nodjs - cause shiny (playing with JS and node).
-perl - cause why not (well TMOWTDI).
+perl - cause why not (well TMTOWTDI).
 python - cause RAWR!
 ruby - cause config managment yo.
 shell - cause I can.
