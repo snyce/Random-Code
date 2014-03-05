@@ -7,51 +7,60 @@ E_TOO_LONG=85
 E_NUMBER_ONE=1
 
 # the length of the password in chars
-pwlen="$1"
-numpw="$2"
+pwlen="${1}"
+numpw="${2}"
 
-if ! [[ "$2" ]]
+if ! [[ "${2}" ]]
 then
   numpw="1"
 else
-  numpw="$2"
+  numpw="${2}"
 fi
 
-if [ $pwlen -gt "250" ]
+if ! [[ "${1}" ]]
+then
+  pwlen="10"
+else
+  pwlen="${1}"
+fi
+
+echo ${pwlen}
+
+if [ "${pwlen}" -gt "250" ]
 then
   #Comment this whole if loop out if you want larger than 250
   echo "Password should probably be < 250 characters"
-  exit $E_TOO_LONG
+  exit ${E_TOO_LONG}
 fi
 
-if [ $# -eq 0 ]
+if [ "$#" -eq 0 ]
 then 
   echo "Usage: ./gpw.sh length amount (amount is optional)"
-  exit $E_NO_ARGS
+  exit ${E_NO_ARGS}
 else
-  if ! [[ $pwlen =~ ^[0-9]+$ ]]
+  if ! [[ "${pwlen}" =~ ^[0-9]+$ ]]
   then
     echo "Sorry Charlie, $pwlen is not an interger, exiting!"
     sleep 2;
     echo "I said GOOD DAY!"
-    exit $E_NUMBER_ONE
+    exit ${E_NUMBER_ONE}
   else
-    if [ $pwlen -lt 5 ] 
+    if [ ${pwlen} -lt 5 ] 
     then
       echo "Password should probably be greater than $pwlen characters long."
-      exit $E_TOO_SHORT
+      exit ${E_TOO_SHORT}
     else
-      if [[ $numpw -eq "1" ]]
+      if [[ ${numpw} -eq "1" ]]
       then
         echo "Generating password that is $pwlen characters long."
         sleep 1;
-        LANG=C; tr -cd "[:upper:][:alnum:][:punct:]" < /dev/random | head -c $pwlen | xargs -0; LANG=en_US.UTF-8
+        LANG=C; tr -cd "[:upper:][:alnum:][:punct:]" < /dev/random | head -c ${pwlen} | xargs -0; LANG=en_US.UTF-8
       else
         echo "Generating $numpw passwords of $pwlen length."
         sleep 1;
-        for ((i = 1; i <= $numpw; i++))
+        for ((i = 1; i <= ${numpw}; i++))
          do 
-           LANG=C; tr -cd "[:upper:][:alnum:][:punct:]" < /dev/random | head -c $pwlen | xargs -0; LANG=en_US.UTF-8
+           LANG=C; tr -cd "[:upper:][:alnum:][:punct:]" < /dev/random | head -c ${pwlen} | xargs -0; LANG=en_US.UTF-8
          done
         fi
     fi
