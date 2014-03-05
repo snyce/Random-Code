@@ -24,8 +24,6 @@ else
   pwlen="${1}"
 fi
 
-echo ${pwlen}
-
 if [ "${pwlen}" -gt "250" ]
 then
   #Comment this whole if loop out if you want larger than 250
@@ -54,13 +52,13 @@ else
       then
         echo "Generating password that is $pwlen characters long."
         sleep 1;
-        LANG=C; tr -cd "[:upper:][:alnum:][:punct:]" < /dev/random | head -c ${pwlen} | xargs -0; LANG=en_US.UTF-8
+        LANG=C; tr -cd "[:upper:][:alnum:][:punct:]" < /dev/urandom | head -c ${pwlen} | xargs -0; LANG=en_US.UTF-8
       else
-        echo "Generating $numpw passwords of $pwlen length."
+        echo "Generating $numpw passwords of ${pwlen} length."
         sleep 1;
         for ((i = 1; i <= ${numpw}; i++))
          do 
-           LANG=C; tr -cd "[:upper:][:alnum:][:punct:]" < /dev/random | head -c ${pwlen} | xargs -0; LANG=en_US.UTF-8
+           LANG=C; tr -cd "[:upper:][:alnum:][:punct:]" < /dev/urandom | head -c ${pwlen} | xargs -0; LANG=en_US.UTF-8
          done
         fi
     fi
