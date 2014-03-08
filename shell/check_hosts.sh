@@ -1,4 +1,4 @@
-#!/bin/sh 
+#!/bin/bash 
 
 ### Feel free to modify to suit your needs ###
 ### NOTE: this is not portable as it stands, OSX will not handle the echo -e###

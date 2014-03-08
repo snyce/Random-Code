@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #This one can be used in loops, e.g. for i in {1..25}; do ./pwgen.sh; done
 
