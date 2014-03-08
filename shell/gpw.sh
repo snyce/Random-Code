@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Error retcodes (ok, just being goofy)
 E_NO_ARGS=65
@@ -10,14 +10,14 @@ E_NUMBER_ONE=1
 pwlen="${1}"
 numpw="${2}"
 
-if [[ -z "${2}" ]]
+if [ -z "${2}" ]
 then
   numpw="1"
 else
   numpw="${2}"
 fi
 
-if [[ -z "${1}" ]]
+if [ -z "${1}" ]
 then
   pwlen="10"
 else
@@ -31,34 +31,34 @@ then
   exit ${E_TOO_LONG}
 fi
 
-if [ "$#" -eq 0 ]
+if [ "$#" -eq "0" ]
 then 
   echo "Usage: ./gpw.sh length amount (amount is optional)"
-  exit ${E_NO_ARGS}
+  exit "${E_NO_ARGS}"
 else
   if ! [[ "${pwlen}" =~ ^[0-9]+$ ]]
   then
     echo "Sorry Charlie, $pwlen is not an interger, exiting!"
     sleep 2;
     echo "I said GOOD DAY!"
-    exit ${E_NUMBER_ONE}
+    exit "${E_NUMBER_ONE}"
   else
-    if [ ${pwlen} -lt 5 ] 
+    if [ "${pwlen}" -lt "5" ] 
     then
       echo "Password should probably be greater than $pwlen characters long."
-      exit ${E_TOO_SHORT}
+      exit "${E_TOO_SHORT}"
     else
-      if [[ ${numpw} -eq "1" ]]
+      if [[ "${numpw}" -eq "1" ]]
       then
         echo "Generating password that is ${pwlen} characters long."
         sleep 1;
-        LANG=C; tr -cd "[:upper:][:alnum:][:punct:]" < /dev/urandom | head -c ${pwlen} | xargs -0; LANG=en_US.UTF-8
+        LANG=C; tr -cd "[:upper:][:alnum:][:punct:]" < /dev/urandom | head -c "${pwlen}" | xargs -0; LANG=en_US.UTF-8
       else
         echo "Generating $numpw passwords of ${pwlen} characters."
         sleep 1;
-        for ((i = 1; i <= ${numpw}; i++))
+        for ((i = 1; i <= "${numpw}"; i++))
          do 
-           LANG=C; tr -cd "[:upper:][:alnum:][:punct:]" < /dev/urandom | head -c ${pwlen} | xargs -0; LANG=en_US.UTF-8
+           LANG=C; tr -cd "[:upper:][:alnum:][:punct:]" < /dev/urandom | head -c "${pwlen}" | xargs -0; LANG=en_US.UTF-8
          done
         fi
     fi
